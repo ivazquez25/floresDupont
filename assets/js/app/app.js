@@ -6,6 +6,7 @@ app.config(function($routeProvider){
 	.when('/propiedades/nueva-propiedad',{templateUrl:'../assets/js/app/templates/properties/propertyForm.html'})
 	.when('/dashboard',{templateUrl:'../assets/js/app/templates/dashboard.html'})
 	.when('/desarrollos',{templateUrl:'../assets/js/app/templates/developments/developments.html'})
+	.when('/vendedores',{templateUrl:'../assets/js/app/templates/sellers/sellers.html'})
 	.otherwise('/dashboard',{templateUrl:'../assets/js/app/templates/dashboard.html'})
 });
 

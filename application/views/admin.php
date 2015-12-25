@@ -39,7 +39,7 @@
                 <ul class="dropdown-menu">
                 <li><a href="#/desarrollos">Desarrollos</a></li>
                 <li><a href="">Tipos de Inmuebles</a></li>
-                <li><a href="">Vendedores</a></li>
+                <li><a href="#/vendedores">Vendedores</a></li>
               </ul>
             </li>
             <li class="dropdown">
@@ -103,5 +103,8 @@
     <!--Developments-->
     <script type="text/javascript" src="<?= base_url('assets/js/app/controllers/DevelopmentsController.js');?>"></script>
     <script type="text/javascript" src="<?= base_url('assets/js/app/services/DevelopmentsDataService.js');?>"></script>
+    
+    <!--Sellers-->
+    <script type="text/javascript" src="<?= base_url('assets/js/app/controllers/SellersController.js');?>"></script>
   </body>
 </html>
