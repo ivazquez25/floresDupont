@@ -1,0 +1,152 @@
+a{
+    color: white !important;
+}
+
+td{
+    vertical-align: middle !important;
+}
+
+.btn-file{
+    cursor: pointer;
+    position: relative;
+    width: auto;
+    padding: 5px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.btn-file:before{
+    content: "";
+    display: block;
+    width: 0;
+    height: 3px;
+    background: #286090;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    transition: all .2s;
+}
+
+.btn-file:hover:before{
+    width: 100%;
+}
+
+#searchbox{
+    width: 300px;
+    height: 30px;
+    top: 10px !important;
+    border-radius: 5px;
+    border: 1px solid gray;
+    padding-left: 5px;
+}
+
+html,body{
+    height: 100%;
+    width: 100%;
+    margin: 0;
+}
+
+#map_canvas {
+    position: relative;
+    height: 300px;
+}
+
+.angular-google-map-container {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+}
+
+header a i{
+    color: #00A1E4;
+}
+
+.main-content{
+    margin-bottom: 100px;
+}
+
+.card{
+    background: white;
+    padding: 10px;
+    box-sizing: border-box;
+    box-shadow: 5px 5px 20px gray;
+    border-left: 8px solid orange;
+    overflow: hidden;
+    margin-top: 15px;
+    transition: all 1s;
+}
+
+.success-card{
+    border-left: 8px solid green !important;
+}
+
+.pagination > li > a, .pagination > li > span{
+    color: #337ab7 !important;
+}
+
+.pagination > li.active > a{
+    color: white !important;
+}
+
+a i{
+    margin-right: 5px; 
+}
+
+.bg-primary{
+    padding: 5px;
+    border-radius: 2.5px;
+}
+
+a.without-text i{
+    margin: 0;
+}
+
+header .navbar{
+    margin-bottom: 0 !important;
+}
+
+h3{
+    color: orange;
+}
+
+div#wrap{
+    min-height: 100%;
+    width: 100%;
+    position: absolute;
+    overflow-y: hidden;
+}
+
+footer{
+    bottom: 0;
+    width: 100%;
+    background: #003580;
+    line-height: 50px;
+    position: absolute;
+}
+
+footer > div.container{
+    color: white;
+    text-align: center;
+}
+
+.fa.hover-effect:hover,
+button.hover-effect:hover .fa,
+a:hover .fa{
+    transform: scale(1.5);
+    transition: all .1s ease-in-out;
+    -moz-transition: all .1s ease-in-out;
+    -webkit-transition: all .1s ease-in-out;
+    -ms-transition: all .1s ease-in-out;
+    -o-transition: all .1s ease-in-out;
+    opacity: .5;
+}
+
+a[aria-expanded=true]{
+    background: transparent !important;
+}
+
+.dropdown-menu > li > a{
+    color: darkorange !important;
+}

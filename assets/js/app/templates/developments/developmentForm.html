@@ -1,0 +1,23 @@
+<div class="modal fade" id="developmentsModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h3 class="modal-title text-primary" id="myModalLabel">{{ (isUpdateModal != 0) ? "Editar desarrollo" : "Nuevo desarrollo" }}</h3>
+      </div>
+      <div class="modal-body">
+          <form class="form" id="addDevelopment" name="addDevelopment" novalidate>
+              <p>Favor de llenar los campos correspondientes</p>
+              <div class="form-group">
+                <label for="name">* Nombre:</label>
+                <input ng-model="formData.name" type="text" class="form-control" placeholder="Escribe el nombre del desarrollo" required>
+              </div>
+          </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+        <button type="button" class="btn btn-primary" ng-disabled="addDevelopment.$invalid" ng-click="(isUpdateModal != 0) ?  updateDevelopment() :  addNewDevelopment()">Guardar</button>
+      </div>
+    </div>
+  </div>
+</div>

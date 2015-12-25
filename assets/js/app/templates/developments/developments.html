@@ -1,0 +1,60 @@
+<div class="container" block-ui="main" class="block-ui-main" ng-controller="DevelopmentsController">
+    
+    <div class="page-header">
+    <h2 class="text-primary">Desarrollos</h2>
+            <a ng-click="getDevelopments()" class="btn btn-primary"><i class="fa fa-refresh"></i>Actualizar</a>
+            <a class="btn btn-success" data-toggle="modal" data-target="#developmentsModal" ng-click="openNewModal()"><i class="fa fa-building hover-effect" ></i>Agregar Desarrolladora</a>
+    </div>
+    
+    <form class="form">
+      <div class="form-group">
+        <div class="pull-right col-sm-4">
+            <label>Busqueda:</label>
+            <input type="text" class="form-control" ng-model="filter.$" placeholder="Escribe algo...">
+        </div>
+        <div class="pull-right col-sm-2">
+            <label>Paginacion</label> <br>
+            <select class="form-control" ng-model="paginationLimit">
+                <option value="5">5</option>     
+                <option value="10">10</option>     
+                <option value="15">15</option>     
+                <option value="20">20</option>     
+            </select>
+        </div>
+      </div>
+    </form>
+    <table class="table" si-table>
+        <thead>
+            <tr>
+                <th>Imagen</th>
+                <th>Desarrollo</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr si-sortable ng-repeat="development in developments | filter:filter">
+                <td class="col-md-3">{{ development.name }}</td>
+                <td>
+                <a class="btn btn-primary without-text" title="Editar" data-toggle="modal" data-target="#developmentsModal" ng-click="openUpdateModal(development.id)"><i class="fa fa-pencil hover-effect"></i></a>
+                <a class="btn btn-danger without-text" data-toggle="tooltip" title="Eliminar" ng-click="deleteDevelopment(development.id)")><i class="fa fa-times hover-effect"></i></a>
+                <a class="btn btn-success without-text" data-toggle="tooltip" title="Ver propiedad"><i class="fa fa-eye hover-effect"></i></a>
+                </td>
+            </tr>
+            <tr ng-if="angular.equals({}, developments)">
+                <td colspan="100%" style="text-align: center">No has seleccionado </td>
+            </tr>
+        </tbody>
+        <tfoot>
+            <tr>
+              <td colspan="5">
+                <si-table-pagination limit="{{paginationLimit}}" first-text="Primera pagina"
+                    last-text="Ultima pagina"
+                    previous-text="«"
+                    next-text="»"/>
+              </td>
+            </tr>
+        </tfoot>
+    </table>
+    
+    <div ng-include="'../assets/js/app/templates/developments/developmentForm.html'"></div>
+</div>
