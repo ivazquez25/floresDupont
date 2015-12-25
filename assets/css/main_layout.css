@@ -6,6 +6,10 @@ td{
     vertical-align: middle !important;
 }
 
+.hola{
+    color: black;
+}
+
 .btn-file{
     cursor: pointer;
     position: relative;
