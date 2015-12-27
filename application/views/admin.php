@@ -106,5 +106,6 @@
     
     <!--Sellers-->
     <script type="text/javascript" src="<?= base_url('assets/js/app/controllers/SellersController.js');?>"></script>
+    <script type="text/javascript" src="<?= base_url('assets/js/app/services/SellersDataService.js');?>"></script>
   </body>
 </html>

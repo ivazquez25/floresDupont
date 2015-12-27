@@ -1,22 +1,18 @@
 <?php
     class Developments_model extends CI_Model {
-        function __construct()
-        {
+        function __construct(){
             parent::__construct();
         }
 
-        function getDevelopments()
-        {
+        function getDevelopments(){
             return $this->db->get('fd_developments')->result();
         }
 
-        function addDevelopments($array)
-        {
+        function addDevelopments($array){
             return $this->db->insert('fd_developments', $array);
         }
 
-        function deleteDevelopments($developmentToDelete)
-        {
+        function deleteDevelopments($developmentToDelete){
             return $this->db->delete('fd_developments', $developmentToDelete);
         }
 

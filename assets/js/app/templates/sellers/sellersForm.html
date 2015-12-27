@@ -1,0 +1,44 @@
+<div class="modal fade" id="sellersModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h3 class="modal-title text-primary" id="myModalLabel">Nuevo vendedor</h3>
+      </div>
+      <div class="modal-body">
+          <form class="form" id="addSeller" name="addSeller" novalidate>
+              <p>Favor de llenar los campos correspondientes</p>
+                  <div class="form-group">
+                    <label for="name">* Nombre:</label>
+                    <input id="name" ng-model="formData.name" type="text" class="form-control" placeholder="Escribe el nombre del vendedor" required>
+                  </div>
+                  <div class="form-group">
+                    <label for="lastName">* Apellidos:</label>
+                    <input ng-model="formData.lastName" id="lastName" type="text" class="form-control" placeholder="Escribe los apellidos del vendedor" required>
+                  </div>
+              
+              <div class="row">
+                <div class="col-sm-6 form-group">
+                    <label for="cellphone">*Celular:</label>
+                    <input type="text" ng-model="formData.cellphone" class="form-control" id="cellphone" placeholder="Escribe el numero celular" required>
+                </div>
+                  <div class="col-sm-6 form-group">
+                    <label for="officephone">*Telefono de oficina:</label>
+                    <input type="text" ng-model="formData.officephone" id="officephone" class="form-control" placeholder="Escribe el numero oficina" required>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="email">* Email:</label>
+                <input ng-model="formData.email" id="email" type="email" name="email" ng-pattern="/^[_a-z0-9]+(\.[_a-z0-9]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{1,50})$/" class="form-control" placeholder="Escribe el email" required>
+                  <small class="text-danger" ng-show="!(addSeller.email.$valid) && !addSeller.email.$error.required">Ingresa un formato v&aacute;lido. Ej. ejemplo@gmail.com</small>
+              </div>
+              
+          </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+        <button type="button" class="btn btn-primary" ng-disabled="addSeller.$invalid" ng-click="addSellers()" data-dismiss="modal">Guardar</button>
+      </div>
+    </div>
+  </div>
+</div>
