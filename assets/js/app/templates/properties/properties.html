@@ -37,14 +37,14 @@
             </tr>
         </thead>
         <tbody>
-            <tr si-sortable ng-repeat="employee in employees | filter:filter">
-                <td><img src="../../../../floresDupont/assets/img/login.jpg" class="img-responsive" style="width: 100px;"></td>
-                <td class="col-md-3">{{ employee.name }}</td>
-                <td>{{ employee.vendor }}</td>
-                <td>{{ employee.created_at | date }}</td>
+            <tr si-sortable ng-repeat="property in properties | filter:filter">
+                <td><img src="../assets/img/properties/{{property.id_folder}}/{{property.kind}}/{{property.fname}}" class="img-responsive" style="width: 100px;"></td>
+                <td class="col-md-3">{{ property.name_inmueble }}</td>
+                <td>{{ property.name + ' ' + property.lastname}}</td>
+                <td>{{ property.create_at | date: 'medium' }}</td>
                 <td>
                 <a class="btn btn-primary without-text" data-toggle="tooltip" title="Editar"><i class="fa fa-pencil hover-effect"></i></a>
-                <a class="btn btn-danger without-text" data-toggle="tooltip" title="Eliminar"><i class="fa fa-times hover-effect"></i></a>
+                <a class="btn btn-danger without-text" data-toggle="tooltip" title="Eliminar" ng-click="deletePropertie(property.id,property.id_folder)")><i class="fa fa-times hover-effect"></i></a>
                 <a class="btn btn-success without-text" data-toggle="tooltip" title="Ver propiedad"><i class="fa fa-eye hover-effect"></i></a>
                 </td>
             </tr>

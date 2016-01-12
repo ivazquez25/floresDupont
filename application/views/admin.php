@@ -38,7 +38,6 @@
                 <a href="" class="main-menu-option hover-effect" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-bar-chart"></i>Catalogos<span class="caret"></span></a>
                 <ul class="dropdown-menu">
                 <li><a href="#/desarrollos">Desarrollos</a></li>
-                <li><a href="">Tipos de Inmuebles</a></li>
                 <li><a href="#/vendedores">Vendedores</a></li>
               </ul>
             </li>
@@ -82,7 +81,7 @@
 	<script type="text/javascript" src="<?= base_url('assets/js/angular-route.min.js')?>"></script>
 	<script type="text/javascript" src="<?= base_url('assets/js/app/app.js')?>"></script>
     <script type="text/javascript" src="<?= base_url('assets/js/jquery-2.1.4.js');?>"></script>
-	<script type="text/javascript" src="<?= base_url('assets/js/bootstrap.min.js');?>">
+	<script type="text/javascript" src="<?= base_url('assets/js/bootstrap.min.js');?>"></script>
     <script type="text/javascript" src="<?= base_url('assets/js/ui-bootstrap-tpls-0.14.3.min.js');?>"></script>
     <script type="text/javascript" src="<?= base_url('assets/js/si-table.min.js');?>"></script>
     <script type="text/javascript" src="<?= base_url('assets/js/angular-block-ui.min.js');?>"></script>
@@ -90,7 +89,7 @@
     <script type="text/javascript" src="<?= base_url('assets/js/ng-file-upload-shim.min.js');?>"></script>
     <script type="text/javascript" src="<?= base_url('assets/js/ng-file-upload.min.js');?>"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/lodash.js/2.4.1/lodash.js"></script>
-    <script src="http://rawgit.com/angular-ui/angular-google-maps/2.0.X/dist/angular-google-maps.js"></script>
+    <script type="text/javascript" src="<?= base_url('assets/js/angular-google-maps.js');?>"></script>
     
     <!--toastr-->
     <script type="text/javascript" src="<?= base_url('assets/js/toastr.js');?>"></script>

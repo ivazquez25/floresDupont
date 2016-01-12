@@ -3,7 +3,7 @@
     <div class="page-header">
     <h2 class="text-primary">Vendedores</h2>
             <a ng-click="getSellers()" class="btn btn-primary"><i class="fa fa-refresh"></i>Actualizar</a>
-            <a class="btn btn-success" data-toggle="modal" data-target="#sellersModal"><i class="fa fa-user-plus hover-effect" ></i>Agregar Vendedor</a>
+            <a class="btn btn-success" data-toggle="modal" data-target="#sellersModal" ng-click="changeToSaveData()"><i class="fa fa-user-plus hover-effect" ></i>Agregar Vendedor</a>
     </div>
     
     <form class="form">
@@ -26,8 +26,8 @@
     <table class="table" si-table>
         <thead>
             <tr>
-                <th>Imagen</th>
-                <th>email</th>
+                <th>Nombre</th>
+                <th>Email</th>
                 <th>Acciones</th>
             </tr>
         </thead>
@@ -36,8 +36,8 @@
                 <td class="col-md-3">{{ seller.name + " " + seller.lastname}}</td>
                 <td class="col-md-3">{{ seller.email }}</td>
                 <td>
-                <a class="btn btn-primary without-text" title="Editar" data-toggle="modal" data-target="#developmentsModal" ng-click="openUpdateModal(seller.id)"><i class="fa fa-pencil hover-effect"></i></a>
-                <a class="btn btn-danger without-text" data-toggle="tooltip" title="Eliminar" ng-click="deleteDevelopment(seller.id)")><i class="fa fa-times hover-effect"></i></a>
+                <a class="btn btn-primary without-text" title="Editar" data-toggle="modal" data-target="#sellersModal" ng-click="getSelectedSeller(seller.id)"><i class="fa fa-pencil hover-effect"></i></a>
+                <a class="btn btn-danger without-text" data-toggle="tooltip" title="Eliminar" ng-click="deleteSeller(seller.id)")><i class="fa fa-times hover-effect"></i></a>
                 <a class="btn btn-success without-text" data-toggle="tooltip" title="Ver propiedad"><i class="fa fa-eye hover-effect"></i></a>
                 </td>
             </tr>

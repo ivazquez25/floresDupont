@@ -1,4 +1,15 @@
-
+<style type="text/css">  
+  .box-show {
+    -webkit-transition:all linear 0.5s;
+    transition:all linear 0.5s;
+  }
+  .box-show.ng-hide {
+    opacity:0;
+  }  
+  .pointer{
+    cursor: pointer;
+  }
+</style>
 <div class="container" ng-controller="PropertiesController">
     <div class="row">
       
@@ -8,216 +19,709 @@
       <hr>
     </div>
     <div class="row">
-        <div class="col-md-3">
+        <div class="col-md-2">
             
         </div>
         <div class="col-md-8">
           <div class="row">
             <form role="form">     
                 <h4>Favor de llenar todos los campos correpondientes</h4>
-                <div class="" > 
-                    <div class="form-group">
-                        <label  class="control-label">Tipo de inmueble:</label>
-                        <select ng-model="formData.kindOfProperty" class="form-control" placeholder="Selecciona tu tipo de propiedad">
-                          <option value="0">Por favor elije una opcion</option>
-                          <option value="1">Casa</option>
-                          <option value="2">Departamento Residencial</option>
-                          <option value="3">Rancho hacienda quinta</option>
-                          <option value="4">Terreno residencial</option>
-                          <option value="5">Casa en condominio residencial</option>
-                          <option value="6">Local Comercial</option>
-                          <option value="7">Rancho hacienda quinta</option>
-                          <option value="8">Oficina comercial</option>
-                          <option value="9">Terreno comercial</option>
-                          <option value="10">Casa con uso de sueldo comercial</option>
-                          <option value="11">Departamento vacacional</option>
-                          <option value="12">Villa quinta vacacional</option>
-                          <option value="13">Casa en condominio vacacional</option>
-                        </select>
-                    </div>
-                    
-                    <div class="form-group">
-                      <label class="control-label">Pertenece al desarollo</label>
-                      <select ng-model="formData.development" class="form-control" placeholder="Desarollo">
-                        <option value="0">Por favor elije una opcion</option>
-                        <option value="1">GDL casas</option>
-                        <option value="2">GDL condominios</option>
-                      </select>
-                    </div>
-                      
-                    <div class="form-group">
-                      <label for='introducction' class="control-label">Introduccion:</label>
-                      <input ng-model="formData.introduction" id="introducction" type="text" class="form-control" placeholder="Introduccion ala propied">
-                    </div>
-                </div>        
-                <div class=""  ng-if="formData.kindOfProperty != 0 && formData.development != 0 && formData.introduction != ''" >
-                      <p class="bg-primary">Informacion General</p>
-                      <div class="form-group">
-                       <span>Elija un tipo de operacion.</span>
-                       <div class="radio">
-                          <label>
-                            <input type="radio" name="salerent" value="sale" ng-model="formData.salerent" >
-                            Venta
-                          </label>
-                       </div>
-                      </div>
+                <div class="box-show" ng-show = "true"> 
+                    <div class="row">
+                      <div class="col-md-6">
                         <div class="form-group">
-                          <div class="radio">
-                            <label>
-                              <input type="radio" name="salerent" value="rent" ng-model="formData.salerent">
-                              Renta
-                            </label>
-                          </div>
+                            <label  class="control-label">Tipo de inmueble:</label>
+                            <select ng-model="formData.kindOfProperty" class="form-control" placeholder="Selecciona tu tipo de propiedad">
+                              <option value="0" >Por favor elije una opcion</option>
+                              <option ng-repeat='kind in kindproperty' value="{{ kind.id }}">{{ kind.name }}</option>
+                            </select>
                         </div>
-                       <div class="form-group">
-                          <label class="control-label">Nombre de La propiedad</label>
-                          <input type="text" class="form-control" ng-model="formData.nameinmueble" placeholder="Nombre de la propiedad">
                       </div>
-                      <div class="form-group">
-                        <div ng-if='formData.salerent == "sale"'>
-                          <label class="control-label">Precio venta</label>
-                          <input type="number" class="form-control" ng-model="formData.pricesale" placeholder="Precio de venta">
-                        </div>
-                        <div ng-if='formData.salerent == "rent"'>  
-                          <label class="control-label">Precio Renta</label>
-                          <input type="number" class="form-control" ng-model="formData.pricerent" placeholder="Precio de renta">
-                        </div> 
-                      </div>
-                      <div class="form-group">
-                          <label class="control-label">Vendedor:</label>
-                          <select class="form-control" ng-model="formData.seller" >
-                            <option value="0">Elija un vendedor del catalogo</option>
-                            <option value="1">Isaac</option>
-                            <option value="2">Raul</option>
-                            <option value="3">Luis</option>
-                            <option value="4">Darbo</option>
+                      <div class="col-md-6">  
+                        <div class="form-group box-show" ng-show='formData.kindOfProperty == "2"'>
+                          <label class="control-label">Pertenece al desarollo</label>
+                          <select ng-model="formData.development" class="form-control" placeholder="Desarollo">
+                            <option value="0">Por favor elije una opcion</option>
+                            <option ng-repeat='delop in develops' value="{{ delop.id }}">{{ delop.name }}</option>
+                            
                           </select>
+                        </div>
                       </div>
-                      <div class="form-group">
+                    </div>
+                    <div class="row">
+                       <div class="col-md-6">
+                            <div class="form-group">
+                              <label class="control-label">Nombre de La propiedad</label>
+                              <input type="text" class="form-control" ng-model="formData.nameinmueble" placeholder="Nombre de la propiedad">
+                            </div>
+                       </div>  
+                    </div>
+                    <p class="bg-primary">Informacion General</p>
+                    <div class="form-group ">
+                      <label>Tipo de operacion</label>
+                      <div class="row"> 
+                        <div class="form-group">
+                            <div class="col-md-2">
+                              <div class="checkbox">
+                                <label><input type="checkbox" ng-model="formData.sale" ng-true-value="'sale'" ng-false-value="false">Venta</label>
+                              </div>
+                            </div>
+                            <div class="col-md-2">
+                              <div class="checkbox">
+                                <label><input type="checkbox" ng-model="formData.rent" ng-true-value="'rent'" ng-false-value="false">Renta</label>
+                              </div>
+                            </div> 
+                            <div class="col-md-2">
+                              <div class="checkbox">
+                                <label><input type="checkbox" ng-model="formData.trans" ng-true-value="'trans'" ng-false-value="false">Traspaso</label>
+                              </div>
+                            </div> 
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-md-6">
                           <div class="form-group">
-                            <label>Descripcion</label>
-                            <textarea class="form-control" rows="5" ng-model="formData.description"></textarea>
+                              <label class="control-label">Asesor asignado</label>
+                              <select class="form-control" ng-model="formData.seller" >
+                                <option value="0">Elija un vendedor del catalogo</option>
+                                <option ng-repeat=" sell in sellers" value="{{ sell.id }}">{{ sell.name }} {{ sell.lastname }}</option>
+                              </select>
                           </div>
-                      </div>
-                </div>
-                  
-                
-                <div class="" ng-if="formData.salerent !='' && formData.nameinmueble !='' && (formData.pricesale !='' || formData.pricerent != '') && formData.seller != 0 && formData.description !=''"> 
+                        </div>
+                        <div class="col-md-6">
+                      
                     
-                      <p class="bg-primary">Informacion Especifica</p>
-                      <div  class="row">
-                        <div class="col-xs-8">
-                          <div class="form-group">
-                            <label class="control-label">Area del Terreno:</label>
-                            <input type="number" class="form-control" ng-model="formData.areateritori" placeholder="Area del terreno">
-                          </div>
                         </div>
-                        <div class="col-xs-4">
-                          <div class="form-group">
-                            <label class="control-label">Elija la capacidad</label>
-                            <select class="form-control" ng-model="formData.capacity">
-                              <option value="0">M2</option>
-                              <option value="1">KM2</option>
-                            </select>
-                          </div>
-                        </div>
-                      </div>  
-                      <div class="form-group row" >
-                          <div class="col-xs-4">
-                            <label class="control-label"># Recamaras</label>
-                            <select class="form-control" ng-model="formData.numrooms" placeholder="Numero de recamaras">
-                              <option value="0">#</option>
-                              <option value="1">1</option>
-                              <option value="2">2</option>
-                              <option value="3">3</option>
-                              <option value="4">4</option>
-                              <option value="5">5</option>
-                              <option value="6">6</option>
-                              <option value="7">7</option>
-                              <option value="8">8</option>
-                              <option value="9">mas de 8</option>
-                            </select>
-                          </div>
-                          <div class="col-xs-4">
-                              <label class="control-label"># BaÃ±os</label>
-                              <select class="form-control" ng-model="formData.badroms" placeholder="Numero de baÃ±os">
-                              <option value="0">#</option>
-                              <option value="1">1</option>
-                              <option value="2">2</option>
-                              <option value="3">3</option>
-                              <option value="4">4</option>
-                              <option value="5">5</option>
-                              <option value="6">6</option>
-                              <option value="7">7</option>
-                              <option value="8">8</option>
-                              <option value="9">mas de 8</option>
-                            </select>
-                          </div>
-                          <div class="col-xs-4">
-                            <label class="control-label"># Medios baÃ±os</label>
-                            <select class="form-control"  ng-model="formData.halfbadroms" placeholder="Numero de medios baÃ±os">
-                              <option value="0">#</option>
-                              <option value="1">1</option>
-                              <option value="2">2</option>
-                              <option value="3">3</option>
-                              <option value="4">4</option>
-                              <option value="5">5</option>
-                              <option value="6">6</option>
-                              <option value="7">7</option>
-                              <option value="8">8</option>
-                              <option value="9">mas de 8</option>
-                            </select>
-                          </div>
                       </div>
-                      <div class="form-group">
+                      <div class="row">
+                        <div class="col-md-4">
+                          <div class="form-group">
+                              <div ng-show='formData.sale != false' class="box-show">
+                                <label class="control-label">Precio venta</label>
+                                <input type="number" class="form-control" ng-model="formData.pricesale" placeholder="Precio de venta">
+                              </div>
+                          </div>
+                        </div>
+                        <div class="col-md-4">
+                          <div class="form-group">
+                              <div ng-show='formData.rent != false' class="box-show">  
+                                <label class="control-label">Precio Renta</label>
+                                <input type="number" class="form-control" ng-model="formData.pricerent" placeholder="Precio de renta">
+                              </div> 
+                          </div>
+                        </div>
+                        <div class="col-md-4">
+                          <div class="form-group">
+                              <div ng-show='formData.trans != false' class="box-show">  
+                                <label class="control-label">Precio Traspaso</label>
+                                <input type="number" class="form-control" ng-model="formData.pricetrans" placeholder="Precio de traspaso">
+                              </div> 
+                          </div>
+                        </div>
+                      </div>
+                    <p class="bg-primary">Informacion Especifica</p>
+                      <div class="row">
+                          <div class="col-xs-2 box-show" ng-show='formData.kindOfProperty==1 ||formData.kindOfProperty==2 || formData.kindOfProperty==4 || formData.kindOfProperty==5 || formData.kindOfProperty==6 || formData.kindOfProperty==7 || formData.kindOfProperty==8 || formData.kindOfProperty==13 || formData.kindOfProperty==14'>
+                            <div class="form-group">
+                              <label class="control-label">Recamaras</label>
+                              <select class="form-control" ng-model="formData.numrooms">
+                                <option value="0">#</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                                <option value="6">6</option>
+                                <option value="7">7</option>
+                                <option value="8">8</option>
+                                <option value="9">9</option>
+                                <option value="10">10</option>
+                                <option value="11">11</option>
+                                <option value="12">12</option>
+                                <option value="13">13</option>
+                                <option value="14">14</option>
+                                <option value="15">15</option>
+                                <option value="16">16</option>
+                                <option value="17">17</option>
+                                <option value="18">18</option>
+                                <option value="19">19</option>
+                                <option value="20">20</option>
+                                <option value="21">21</option>
+                                <option value="22">22</option>
+                                <option value="23">23</option>
+                                <option value="24">24</option>
+                                <option value="25">25</option>
+                                <option value="26">26</option>
+                                <option value="27">27</option>
+                                <option value="28">28</option>
+                                <option value="29">29</option>
+                                <option value="30">30</option>
+                                <option value="mas de 30">mas de 30</option>
+                              </select>
+                            </div>
+                          </div>
+                          <div class="col-xs-2 box-show" ng-show='formData.kindOfProperty==1 ||formData.kindOfProperty==2 || formData.kindOfProperty==4 || formData.kindOfProperty==5 || formData.kindOfProperty==6 || formData.kindOfProperty==7 || formData.kindOfProperty==8 || formData.kindOfProperty==9 || formData.kindOfProperty==10 || formData.kindOfProperty==13 || formData.kindOfProperty==14'>
+                              <label class="control-label">Baños</label>
+                              <select class="form-control" ng-model="formData.badroms">
+                                <option value="0">#</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                                <option value="6">6</option>
+                                <option value="7">7</option>
+                                <option value="8">8</option>
+                                <option value="9">9</option>
+                                <option value="10">10</option>
+                                <option value="11">11</option>
+                                <option value="12">12</option>
+                                <option value="13">13</option>
+                                <option value="14">14</option>
+                                <option value="15">15</option>
+                                <option value="16">16</option>
+                                <option value="17">17</option>
+                                <option value="18">18</option>
+                                <option value="19">19</option>
+                                <option value="20">20</option>
+                                <option value="21">21</option>
+                                <option value="22">22</option>
+                                <option value="23">23</option>
+                                <option value="24">24</option>
+                                <option value="25">25</option>
+                                <option value="26">26</option>
+                                <option value="27">27</option>
+                                <option value="28">28</option>
+                                <option value="29">29</option>
+                                <option value="30">30</option>
+                                <option value="mas de 30">mas de 30</option>
+                              </select>
+                          </div>
+                          <div class="col-xs-3 box-show"  ng-show='formData.kindOfProperty==1 ||formData.kindOfProperty==2 || formData.kindOfProperty==4 || formData.kindOfProperty==5 || formData.kindOfProperty==6 || formData.kindOfProperty==7 || formData.kindOfProperty==8 || formData.kindOfProperty==9 || formData.kindOfProperty==10 || formData.kindOfProperty==13 || formData.kindOfProperty==14'>
+                            <label class="control-label">Medios baños</label>
+                            <select class="form-control"  ng-model="formData.halfbadroms">
+                              <option value="0">#</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                                <option value="6">6</option>
+                                <option value="7">7</option>
+                                <option value="8">8</option>
+                                <option value="9">9</option>
+                                <option value="10">10</option>
+                                <option value="11">11</option>
+                                <option value="12">12</option>
+                                <option value="13">13</option>
+                                <option value="14">14</option>
+                                <option value="15">15</option>
+                                <option value="16">16</option>
+                                <option value="17">17</option>
+                                <option value="18">18</option>
+                                <option value="19">19</option>
+                                <option value="20">20</option>
+                                <option value="21">21</option>
+                                <option value="22">22</option>
+                                <option value="23">23</option>
+                                <option value="24">24</option>
+                                <option value="25">25</option>
+                                <option value="26">26</option>
+                                <option value="27">27</option>
+                                <option value="28">28</option>
+                                <option value="29">29</option>
+                                <option value="30">30</option>
+                                <option value="mas de 30">mas de 30</option>
+                            </select>
+                          </div>
+                          <div class="col-xs-2 box-show"  ng-show='formData.kindOfProperty==1 ||formData.kindOfProperty==2 || formData.kindOfProperty==4 || formData.kindOfProperty==5 || formData.kindOfProperty==6 || formData.kindOfProperty==7 || formData.kindOfProperty==8 || formData.kindOfProperty==10 || formData.kindOfProperty==13 || formData.kindOfProperty==14'>
+                            <label class="control-label">Edad</label>
+                            <select class="form-control"  ng-model="formData.age">
+                              <option value="0">#</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                                <option value="6">6</option>
+                                <option value="7">7</option>
+                                <option value="8">8</option>
+                                <option value="9">9</option>
+                                <option value="10">10</option>
+                                <option value="11">11</option>
+                                <option value="12">12</option>
+                                <option value="13">13</option>
+                                <option value="14">14</option>
+                                <option value="15">15</option>
+                                <option value="16">16</option>
+                                <option value="17">17</option>
+                                <option value="18">18</option>
+                                <option value="19">19</option>
+                                <option value="20">20</option>
+                                <option value="21">21</option>
+                                <option value="22">22</option>
+                                <option value="23">23</option>
+                                <option value="24">24</option>
+                                <option value="25">25</option>
+                                <option value="26">26</option>
+                                <option value="27">27</option>
+                                <option value="28">28</option>
+                                <option value="29">29</option>
+                                <option value="30">30</option>
+                                <option value="mas de 30">mas de 30</option>
+                            </select>
+                          </div>
+                          <div class="col-xs-3 box-show" ng-show='formData.kindOfProperty==1 ||formData.kindOfProperty==2 || formData.kindOfProperty==4 || formData.kindOfProperty==5 || formData.kindOfProperty==6 || formData.kindOfProperty==7 || formData.kindOfProperty==8 || formData.kindOfProperty==9 || formData.kindOfProperty==10 || formData.kindOfProperty==13 || formData.kindOfProperty==14'>
+                            <label class="control-label">Estacionamiento/s</label>
+                            <select class="form-control"  ng-model="formData.parking">
+                              <option value="0">#</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                                <option value="6">6</option>
+                                <option value="7">7</option>
+                                <option value="8">8</option>
+                                <option value="9">9</option>
+                                <option value="10">10</option>
+                                <option value="11">11</option>
+                                <option value="12">12</option>
+                                <option value="13">13</option>
+                                <option value="14">14</option>
+                                <option value="15">15</option>
+                                <option value="16">16</option>
+                                <option value="17">17</option>
+                                <option value="18">18</option>
+                                <option value="19">19</option>
+                                <option value="20">20</option>
+                                <option value="21">21</option>
+                                <option value="22">22</option>
+                                <option value="23">23</option>
+                                <option value="24">24</option>
+                                <option value="25">25</option>
+                                <option value="26">26</option>
+                                <option value="27">27</option>
+                                <option value="28">28</option>
+                                <option value="29">29</option>
+                                <option value="30">30</option>
+                                <option value="mas de 30">mas de 30</option>
+                            </select>
+                          </div> 
+                      </div>     
+                    <div class="row">
+                        <div class="col-md-3 box-show"  ng-show='formData.kindOfProperty==1 ||formData.kindOfProperty==2  || formData.kindOfProperty==6 || formData.kindOfProperty==7 || formData.kindOfProperty==13 || formData.kindOfProperty==14'>
+                          <div class="form-group ">
+                            <label>Niveles construidos</label>
+                            <select class="form-control" id="oficina" ng-model="formData.levelsbuilld">
+                              <option value="0">#</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                                <option value="6">6</option>
+                                <option value="7">7</option>
+                                <option value="8">8</option>
+                                <option value="9">9</option>
+                                <option value="10">10</option>
+                                <option value="11">11</option>
+                                <option value="12">12</option>
+                                <option value="13">13</option>
+                                <option value="14">14</option>
+                                <option value="15">15</option>
+                                <option value="16">16</option>
+                                <option value="17">17</option>
+                                <option value="18">18</option>
+                                <option value="19">19</option>
+                                <option value="20">20</option>
+                                <option value="21">21</option>
+                                <option value="22">22</option>
+                                <option value="23">23</option>
+                                <option value="24">24</option>
+                                <option value="25">25</option>
+                                <option value="26">26</option>
+                                <option value="27">27</option>
+                                <option value="28">28</option>
+                                <option value="29">29</option>
+                                <option value="30">30</option>
+                                <option value="mas de 30">mas de 30</option>
+                            </select>
+                          </div>
+                        </div>
+                        <div class="col-md-3 box-show"  ng-show='formData.kindOfProperty==1 ||formData.kindOfProperty==2 || formData.kindOfProperty==4 || formData.kindOfProperty==7 || formData.kindOfProperty==13 || formData.kindOfProperty==14'>
+                          <div class="form-group ">
+                            <label>Cuarto de servicio</label>
+                            <select class="form-control" ng-model="formData.services">
+                              <option value="0">#</option>
+                              <option value="1">kl</option>
+                              <option value="2">M2</option>
+                            </select>
+                          </div>
+                        </div>
+                        <div class="col-md-3 box-show"  ng-show='formData.kindOfProperty==4 || formData.kindOfProperty==10'>
+                          <div class="form-group ">
+                            <label>Nivel departamento</label>
+                            <select class="form-control" ng-model="formData.levels">
+                              <option value="0">#</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                                <option value="6">6</option>
+                                <option value="7">7</option>
+                                <option value="8">8</option>
+                                <option value="9">9</option>
+                                <option value="10">10</option>
+                                <option value="11">11</option>
+                                <option value="12">12</option>
+                                <option value="13">13</option>
+                                <option value="14">14</option>
+                                <option value="15">15</option>
+                                <option value="16">16</option>
+                                <option value="17">17</option>
+                                <option value="18">18</option>
+                                <option value="19">19</option>
+                                <option value="20">20</option>
+                                <option value="21">21</option>
+                                <option value="22">22</option>
+                                <option value="23">23</option>
+                                <option value="24">24</option>
+                                <option value="25">25</option>
+                                <option value="26">26</option>
+                                <option value="27">27</option>
+                                <option value="28">28</option>
+                                <option value="29">29</option>
+                                <option value="30">30</option>
+                                <option value="mas de 30">mas de 30</option>
+                            </select>
+                          </div>
+                        </div>
+                        <div class="col-md-3 box-show"  ng-show='formData.kindOfProperty==5 || formData.kindOfProperty==8'>
+                          <div class="form-group ">
+                            <label>Pisos totales</label>
+                            <select class="form-control" ng-model="formData.flors">
+                              <option value="0">#</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                                <option value="6">6</option>
+                                <option value="7">7</option>
+                                <option value="8">8</option>
+                                <option value="9">9</option>
+                                <option value="10">10</option>
+                                <option value="11">11</option>
+                                <option value="12">12</option>
+                                <option value="13">13</option>
+                                <option value="14">14</option>
+                                <option value="15">15</option>
+                                <option value="16">16</option>
+                                <option value="17">17</option>
+                                <option value="18">18</option>
+                                <option value="19">19</option>
+                                <option value="20">20</option>
+                                <option value="21">21</option>
+                                <option value="22">22</option>
+                                <option value="23">23</option>
+                                <option value="24">24</option>
+                                <option value="25">25</option>
+                                <option value="26">26</option>
+                                <option value="27">27</option>
+                                <option value="28">28</option>
+                                <option value="29">29</option>
+                                <option value="30">30</option>
+                                <option value="mas de 30">mas de 30</option>
+                            </select>
+                          </div>
+                        </div>
+                    </div>
+                    <div  class="row" style="padding-bottom: 20px;">
+                        <div class="col-xs-4 box-show" ng-show='formData.kindOfProperty==1 ||formData.kindOfProperty==2 || formData.kindOfProperty==3 || formData.kindOfProperty==4 || formData.kindOfProperty==5 || formData.kindOfProperty==6 || formData.kindOfProperty==7 || formData.kindOfProperty==8 || formData.kindOfProperty==9 || formData.kindOfProperty==10 || formData.kindOfProperty==11 || formData.kindOfProperty==12 || formData.kindOfProperty==13 || formData.kindOfProperty==14 || formData.kindOfProperty==15'>
+                            <div class="form-group" style="float: left;width: 60%;">
+                              <label class="control-label">Terreno</label>
+                              <input type="number" class="form-control" ng-model="formData.areateritori" placeholder="Area">
+                            </div>
+                            <div class="form-group" style="float: left;top: 25px;position: relative;">
+                                <select class="form-control" ng-model="formData.capacity.areateritori">
+                                  <option value="M2">M2</option>
+                                  <option value="KM">KM2</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-xs-4 box-show" ng-show='formData.kindOfProperty==1 ||formData.kindOfProperty==2 || formData.kindOfProperty==3 || formData.kindOfProperty==4 || formData.kindOfProperty==5 || formData.kindOfProperty==6 || formData.kindOfProperty==7 || formData.kindOfProperty==8 || formData.kindOfProperty==9 || formData.kindOfProperty==10 || formData.kindOfProperty==11 || formData.kindOfProperty==12 || formData.kindOfProperty==13 || formData.kindOfProperty==14'>
+                            <div class="form-group" style="float: left;width: 60%;">
+                              <label class="control-label">Construccion</label>
+                              <input type="number" class="form-control" ng-model="formData.areaconstruct" placeholder="Area">
+                            </div>
+                            <div class="form-group" style="float: left;top: 25px;position: relative;">
+                              <select class="form-control" ng-model="formData.capacity.areaconstruct">
+                                <option value="M2">M2</option>
+                                <option value="KM2">KM2</option>
+                              </select>
+                            </div>
+                        </div>
+                        <div class="col-xs-4 box-show" ng-show='formData.kindOfProperty==3 || formData.kindOfProperty==11 || formData.kindOfProperty==12'>
+                            <div class="form-group" style="float: left;width: 60%;">
+                              <label class="control-label">Bodega</label>
+                              <input type="number" class="form-control" ng-model="formData.areabode" placeholder="Area">
+                            </div>
+                            <div class="form-group" style="float: left;top: 25px;position: relative;">
+                              <select class="form-control" ng-model="formData.capacity.areabode">
+                                <option value="M2">M2</option>
+                                <option value="KM2">KM2</option>
+                              </select>
+                            </div>
+                          </div>
+                    </div> 
+                    <div class="row" style="padding-bottom: 20px;">
+                        <div class="col-xs-4 box-show" ng-show='formData.kindOfProperty==3 || formData.kindOfProperty==11 || formData.kindOfProperty==12'>                
+                            <div class="form-group" style="float: left;width: 60%;">
+                              <label class="control-label">Oficina</label>
+                              <input type="number" class="form-control" ng-model="formData.areaoficce" placeholder="Area">
+                            </div>
+                            <div class="form-group" style="float: left;top: 25px;position: relative;">
+                              <select class="form-control" ng-model="formData.capacity.areaoficce">
+                                <option value="M2">M2</option>
+                                <option value="KM2">KM2</option>
+                              </select>
+                            </div>
+                        </div>
+                        <div class="col-xs-4 box-show" ng-show='formData.kindOfProperty==9 || formData.kindOfProperty==15'>
+                            <div class="form-group" style="float: left;width: 60%;">
+                              <label class="control-label">Frente</label>
+                              <input type="number" class="form-control" ng-model="formData.areacros" placeholder="Area">
+                            </div>
+                            <div class="form-group" style="float: left;top: 25px;position: relative;">
+                              <select class="form-control" ng-model="formData.capacity.areacros">
+                                <option value="M2">M2</option>
+                                <option value="KM2">KM2</option>
+                              </select>
+                            </div>
+                        </div>
+                        <div class="col-xs-4 box-show" ng-show='formData.kindOfProperty==9 || formData.kindOfProperty==15'>
+                            <div class="form-group" style="float: left;width: 60%;">
+                              <label class="control-label">Fondo</label>
+                              <input type="number" class="form-control" ng-model="formData.areadeep" placeholder="Area">
+                            </div>
+                            <div class="form-group" style="float: left;top: 25px;position: relative;">
+                              <select class="form-control" ng-model="formData.capacity.areadeep">
+                                <option value="M2">M2</option>
+                                <option value="KM2">KM2</option>
+                              </select>
+                            </div>
+                          </div>
+                  
+                        </div>
+                    </div> 
+
+                    <div class="form-group">
                           <label class="control-label">Amueblado</label>
                           <label class="radio-inline"><input type="radio" value='si' ng-model='formData.furnished'>Si</label>
                           <label class="radio-inline"><input type="radio" value='no' ng-model='formData.furnished'>No</label>
-                     
+                    </div>
+                    <p class="bg-primary">Adicionales</p>
+                    <div class="form-group ">
+                      <div class="row">
+                        <div class="col-md-12">
+                          <div class="form-group ">
+                            <label>Tipo de terreno</label>
+                            <select class="form-control" ng-model="formData.kindterren">
+                              <option value="0">Elija una opcion</option>
+                              <option value="1">kl</option>
+                              <option value="2">M2</option>
+                            </select>
+                          </div>
+                        </div>
+                        <div class="col-md-12">
+                          <div class="col-md-6">
+                            <label>Comentarios sobre la propiedad</label>
+                            <textarea class="form-control" rows="15" ng-model="formData.coments"></textarea>
+                          </div>
+                          <div class="col-md-6">
+                            <label>Comentarios sobre el vecindario</label>
+                            <textarea class="form-control" rows="15" ng-model="formData.coments1"></textarea>
+                          </div>
+                        </div>
                       </div>
-                </div>
+                      <div class="row">
+                        <div class="col-md-3">
+                          <div class="checkbox">
+                            <label><input type="checkbox" ng-model="formData.chekboxes.value0" ng-true-value="'Aire acondicionado'" ng-false-value="false">Aire acondicionado</label>
+                          </div>
+                          <div class="checkbox">
+                            <label><input type="checkbox" ng-model="formData.chekboxes.value1" ng-true-value="'Alberca'" ng-false-value="false">Alberca</label>
+                          </div>
+                          <div class="checkbox">
+                            <label><input type="checkbox" ng-model="formData.chekboxes.value2" ng-true-value="'Amueblado'" ng-false-value="false">Amueblado</label>
+                          </div>
+                        </div>
+                        <div class="col-md-3">
+                          <div class="checkbox">
+                            <label><input type="checkbox" ng-model="formData.chekboxes.value3" ng-true-value="'Areas comunes'" ng-false-value="false">Areas comunes</label>
+                          </div>
+                          <div class="checkbox">
+                            <label><input type="checkbox" ng-model="formData.chekboxes.value4" ng-true-value="'Areas de juego'" ng-false-value="false">Areas de juego</label>
+                          </div>
+                          <div class="checkbox">
+                            <label><input type="checkbox" ng-model="formData.chekboxes.value5" ng-true-value="'Biblioteca'" ng-false-value="false">Biblioteca</label>
+                          </div>
+                        </div>
+                        <div class="col-md-3">
+                          <div class="checkbox">
+                            <label><input type="checkbox" ng-model="formData.chekboxes.value6" ng-true-value="'Calefaccion'" ng-false-value="false">Calefaccion</label>
+                          </div>
+                          <div class="checkbox">
+                            <label><input type="checkbox" ng-model="formData.chekboxes.value7" ng-true-value="'Campo de golf'" ng-false-value="false">Campo de golf</label>
+                          </div>
+                          <div class="checkbox ">
+                            <label><input type="checkbox" ng-model="formData.chekboxes.value8" ng-true-value="'Cancha de tenis'" ng-false-value="false">Cancha de tenis</label>
+                          </div>
+                        </div>
+                        <div class="col-md-3">
+                          <div class="checkbox">
+                            <label><input type="checkbox" ng-model="formData.chekboxes.value9" ng-true-value="'Casa club'" ng-false-value="false">Casa club</label>
+                          </div>
+                          <div class="checkbox">
+                            <label><input type="checkbox" ng-model="formData.chekboxes.value10" ng-true-value="'Cava'" ng-false-value="false">Cava</label>
+                          </div>
+                          <div class="checkbox">
+                            <label><input type="checkbox" ng-model="formData.chekboxes.value11" ng-true-value="'Circuito cerrado'" ng-false-value="false">Circuito cerrado</label>
+                          </div>
+                        </div>
+                        <div class="col-md-3">
+                          <div class="checkbox">
+                            <label><input type="checkbox" ng-model="formData.chekboxes.value12" ng-true-value="'Cocina integral'" ng-false-value="false">Cocina integral</label>
+                          </div>
+                          <div class="checkbox">
+                            <label><input type="checkbox" ng-model="formData.chekboxes.value13" ng-true-value="'Cuarto de lavado'" ng-false-value="false">Cuarto de lavado</label>
+                          </div>
+                          <div class="checkbox">
+                            <label><input type="checkbox" ng-model="formData.chekboxes.value14" ng-true-value="'Elevador'" ng-false-value="false">Elevador</label>
+                          </div>
+                        </div>
+                        <div class="col-md-3">
+                          <div class="checkbox">
+                            <label><input type="checkbox" ng-model="formData.chekboxes.value15" ng-true-value="'Estudio'" ng-false-value="false">Estudio</label>
+                          </div>
+                          <div class="checkbox">
+                            <label><input type="checkbox" ng-model="formData.chekboxes.value16" ng-true-value="'Gimnacio'" ng-false-value="false">Gimnacio</label>
+                          </div>
+                          <div class="checkbox">
+                            <label><input type="checkbox" ng-model="formData.chekboxes.value17" ng-true-value="'Helipuerto'" ng-false-value="false">Helipuerto</label>
+                          </div>
+                        </div>
+                        <div class="col-md-3">
+                          <div class="checkbox">
+                            <label><input type="checkbox" ng-model="formData.chekboxes.value18" ng-true-value="'Instalacion de red'" ng-false-value="false">Instalacion de red</label>
+                          </div>
+                          <div class="checkbox">
+                            <label><input type="checkbox" ng-model="formData.chekboxes.value19" ng-true-value="'Jacuzzi'" ng-false-value="false">Jacuzzi</label>
+                          </div>
+                          <div class="checkbox ">
+                            <label><input type="checkbox" ng-model="formData.chekboxes.value20" ng-true-value="'Jardin'" ng-false-value="false">Jardin</label>
+                          </div>
+                        </div>
+                        <div class="col-md-3">
+                          <div class="checkbox">
+                            <label><input type="checkbox" ng-model="formData.chekboxes.value21" ng-true-value="'Red inalambrica'" ng-false-value="false">Red inalambrica</label>
+                          </div>
+                          <div class="checkbox">
+                            <label><input type="checkbox" ng-model="formData.chekboxes.value22" ng-true-value="'Sala de tv'" ng-false-value="false">Sala de tv</label>
+                          </div>
+                          <div class="checkbox">
+                            <label><input type="checkbox" ng-model="formData.chekboxes.value23" ng-true-value="'Salon de fiestas'" ng-false-value="false">Salon de fiestas</label>
+                          </div>
+                        </div>
+                        <div class="col-md-3">
+                          <div class="checkbox">
+                            <label><input type="checkbox" ng-model="formData.chekboxes.value24" ng-true-value="'Salon de juegos'" ng-false-value="false">Salon de juegos</label>
+                          </div>
+                          <div class="checkbox">
+                            <label><input type="checkbox" ng-model="formData.chekboxes.value25" ng-true-value="'Sistemas de seguridad'" ng-false-value="false">Sistemas de seguridad</label>
+                          </div>
+                          <div class="checkbox">
+                            <label><input type="checkbox" ng-model="formData.chekboxes.value26" ng-true-value="'Spa'" ng-false-value="false">Spa</label>
+                          </div>
+                        </div>
+                        <div class="col-md-3">
+                          <div class="checkbox">
+                            <label><input type="checkbox" ng-model="formData.chekboxes.value27" ng-true-value="'Terraza'" ng-false-value="false">Terraza</label>
+                          </div>
+                          <div class="checkbox">
+                            <label><input type="checkbox" ng-model="formData.chekboxes.value28" ng-true-value="'Tintoreria y lavanderia'" ng-false-value="false">Tintoreria y lavanderia</label>
+                          </div>
+                          <div class="checkbox">
+                            <label><input type="checkbox" ng-model="formData.chekboxes.value29" ng-true-value="'Vestidor'" ng-false-value="false">Vestidor</label>
+                          </div>
+                        </div>
+                        <div class="col-md-3">
+                          <div class="checkbox">
+                            <label><input type="checkbox" ng-model="formData.chekboxes.value30" ng-true-value="'Vigilante'" ng-false-value="false">Vigilante</label>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                </div>  
 
-                <div class="" ng-if="formData.areateritori !='' && formData.numrooms != 0 && formData.badroms != 0 && formData.halfbadroms != 0 && formData.furnished != '' "> 
-                    <p class="bg-primary">Ubicacion</p>
-                       
-              
+                <div class="box-show" ng-show = " formData.kindOfProperty != 0 && formData.nameinmueble != '' &&  ((formData.sale != false &&  formData.pricesale != '') || (formData.rent != false &&  formData.pricerent != '') || (formData.trans!= false &&  formData.pricetrans!= '')) && formData.seller != 0 && formData.kindterren != 0 && formData.coments != '' && formData.coments1 != ''" > 
+                    <p class="bg-primary">Ubicacion</p>                    
                           <div class="form-group">
                            <label class="control-label">Codigo postal</label>
                            <input type="text" class="form-control" placeholder="Codigo postal" ng-model='formData.postalcode'>
                           </div>
-                          <div class="form-group">
-                           <label class="control-label">Estado</label>
-                           <input type="text" class="form-control" placeholder="Estado" ng-model='formData.estate'>
+                          <div class="row">
+                            <div class="col-md-6">  
+                              <div class="form-group">
+                               <label class="control-label">Estado</label>
+                               <input type="text" class="form-control" placeholder="Estado" ng-model='formData.estate'>
+                              </div>
+                            </div>
+                            <div class="col-md-6">  
+                              <div class="form-group">
+                               <label class="control-label">Ciudad</label>
+                               <input type="text" class="form-control" placeholder="Ciudad" ng-model='formData.city' >
+                              </div>
+                            </div>
                           </div>
-                          <div class="form-group">
-                           <label class="control-label">Ciudad</label>
-                           <input type="text" class="form-control" placeholder="Ciudad" ng-model='formData.city' >
+                        <div class="row">
+                            <div class="col-md-6">  
+                              <div class="form-group">
+                               <label class="control-label">Colonia</label>
+                               <input type="text" class="form-control" placeholder="Colonia" ng-model='formData.hood' >
+                              </div>
+                            </div>
+                            <div class="col-md-6"> 
+                              <div class="form-group">
+                               <label class="control-label">Calle</label>
+                               <input type="text" class="form-control" placeholder="Calle" ng-model='formData.street' >
+                              </div>
+                           </div>
+                        </div> 
+                        <div class="row">
+                          <div class="col-md-6">  
+                            <div class="form-group">
+                             <label class="control-label">Numero exterior</label>
+                             <input type="text" class="form-control" placeholder="#exterior" ng-model='formData.inside' >
+                            </div>
                           </div>
-                          <div class="form-group">
-                           <label class="control-label">Colonia</label>
-                           <input type="text" class="form-control" placeholder="Colonia" ng-model='formData.hood' >
+                          <div class="col-md-6">  
+                            <div class="form-group">
+                             <label class="control-label">Numero interior</label>
+                             <input type="text" class="form-control" placeholder="#interior" ng-model='formData.outside' >
+                            </div>
                           </div>
-
-                          <div class="form-group">
-                           <label class="control-label">Calle</label>
-                           <input type="text" class="form-control" placeholder="Calle" ng-model='formData.street' >
-                          </div>
-                          <div class="form-group">
-                           <label class="control-label">Numero exterior</label>
-                           <input type="text" class="form-control" placeholder="#exterior" ng-model='formData.inside' >
-                          </div>
-                          <div class="form-group">
-                           <label class="control-label">Numero interior</label>
-                           <input type="text" class="form-control" placeholder="#interior" ng-model='formData.outside' >
-                          </div>
+                        </div> 
 
                         <div class="form-group">
-                          <label for="direccion">Direccion</label>
-                          <textarea class="form-control" rows="8" id="direccion" placeholder="Numero,Cruzamiento,etc"  ng-model='formData.directions'></textarea>
+                          <label for="direccion">Ubicacion</label>
+                          <textarea class="form-control" rows="8" id="direccion" placeholder="Escriba las referencias más populares o próximas. Numero,Cruzamiento,etc"  ng-model='formData.directions'></textarea>
                         </div>
                      
                         <div class="form-group">
-                              <strong>Â¿Desea p&uacute;blicar esta propiedad?</strong> <br>
+                              <strong>¿Desea p&uacute;blicar esta propiedad?</strong> <br>
                               <label class="radio-inline"><input type="radio" name="isPublished" value='si' ng-model='formData.publicc'>Si</label>
                               <label class="radio-inline"><input type="radio" name="isPublished" value='no' ng-model='formData.publicc' >No</label>
                         </div>
@@ -236,189 +740,62 @@
                         </div>
                 </div>
                 
-                <div class="" ng-if="formData.estate != '' && formData.city != '' && formData.hood != '' && formData.postalcode != '' && formData.directions != '' && formData.publicc != '' && formData.street !='' && formData.inside != '' && formData.outside != ''" > 
+                <div class="box-show" ng-show=" formData.postalcode != '' && formData.estate != '' && formData.city != '' && formData.hood != '' && formData.street != '' && formData.inside != '' && formData.directions != ''" > 
                     <p class="bg-primary">Operativos</p>
                     <div class="row">
                       <div class="col-md-6">   
-                        <div class="form-group ">
-                           <label class="control-label">Estado</label>
-                            <select class="form-control" ng-model="formData.estateoperative">
-                                <option value="0">Elija una opccion</option>
-                                <option value="1">Ocupado</option>
-                                <option value="3">Libre</option>
-                            </select>
-                        </div>
                         <div class="form-group">
                           <label>Oficina asignada</label>
                           <input type="text" class="form-control" ng-model="formData.oficine" disabled>
                         </div>
-                      </div>
-                      <div class="col-md-6" style="height: 140px;">
-                        <center style="height: 140px; line-height: 140px;">
-                          <label> Destacar</label>
-                          <label class="radio-inline"><input type="radio" ng-model="formData.destacate" value='si' style="margin-top: 63px;">Si</label>
-                          <label class="radio-inline"><input type="radio" ng-model="formData.destacate" value='no' style="margin-top: 63px;">No</label>
-                        </center> 
                       </div>
                     </div>  
                     <div class="row">
                       <div class="col-md-12"> 
                         <div class="form-group">
                           <label >Palabras clave</label>
-                          <input type="text" class="form-control" ng-model="formData.clavewords" placeholder="Separar las palabras clave con , ejem: casa,venta,bonita,bien ubicada">
-                        </div>
-                      </div>
-                    </div> 
-                </div>
-                
-                <div class="" ng-if="formData.estateoperative != 0  && formData.destacate != '' && formData.clavewords != ''" > 
-                    <p class="bg-primary">Adicionales</p>
-                    <div class="form-group ">
-                      <div class="row">
-                        <div class="col-md-6">
-                          <div class="form-group ">
-                            <label>Niveles construidos</label>
-                            <select class="form-control" id="oficina" ng-model="formData.levels">
-                              <option value="0">Elija una opcion</option>
-                              <option value="1">1</option>
-                              <option value="3">2</option>
-                              <option value="4">3</option>
-                              <option value="5">4</option>
-                              <option value="6">5</option>
-                              <option value="7">6</option>
-                              <option value="8">7</option>
-                              <option value="9">8</option>
-                              <option value="10">9</option>
-                              <option value="11">10</option>
-                              <option value="12">Mas de 10</option>
-                            </select>
-                          </div>
-                        </div>
-                        <div class="col-md-6">
-                          <div class="form-group ">
-                            <label>Cuarto de servicio</label>
-                            <select class="form-control" ng-model="formData.services">
-                              <option value="0">Elija una opcion</option>
-                              <option value="1">kl</option>
-                              <option value="2">M2</option>
-                            </select>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="row">
-                        <div class="col-md-6">
-                          <div class="form-group ">
-                            <label>Espacio para</label>
-                            <input type="text" class="form-control" ng-model="formData.espace">
-                          </div>
-                        </div>
-                        <div class="col-md-6">
-                          <div class="form-group ">
-                            <label>Tipo de aire</label>
-                            <select class="form-control" ng-model="formData.kindair">
-                              <option value="0">Elija una opcion</option>
-                              <option value="1">kl</option>
-                              <option value="2">M2</option>
-                            </select>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="row">
-                        <div class="col-md-12">
-                          <div class="form-group ">
-                            <label>Tipo de terreno</label>
-                            <select class="form-control" ng-model="formData.kindterren">
-                              <option value="0">Elija una opcion</option>
-                              <option value="1">kl</option>
-                              <option value="2">M2</option>
-                            </select>
-                          </div>
-                        </div>
-                        <div class="col-md-12">
-                            <label>Comentarios</label>
-                            <textarea class="form-control" rows="5" ng-model="formData.coments"></textarea>
-                          </div>
-                      </div>
-                      <div class="row">
-                        <div class="col-md-3">
-                          <div class="checkbox">
-                            <label><input type="checkbox" ng-model="formData.chekboxes.value0" ng-true-value="'zona arbolada'" ng-false-value="false">zona arbolada</label>
-                          </div>
-                          <div class="checkbox">
-                            <label><input type="checkbox" ng-model="formData.chekboxes.value1" ng-true-value="'Chimenea'" ng-false-value="false">Chimenea</label>
-                          </div>
-                          <div class="checkbox">
-                            <label><input type="checkbox" ng-model="formData.chekboxes.value2" ng-true-value="'Alberca'" ng-false-value="false">Alberca</label>
-                          </div>
-                        </div>
-                        <div class="col-md-3">
-                          <div class="checkbox">
-                            <label><input type="checkbox" ng-model="formData.chekboxes.value3" ng-true-value="'Jacuzi'" ng-false-value="false">Jacuzi</label>
-                          </div>
-                          <div class="checkbox">
-                            <label><input type="checkbox" ng-model="formData.chekboxes.value4" ng-true-value="'Vigilancia'" ng-false-value="false">Vigilancia</label>
-                          </div>
-                          <div class="checkbox">
-                            <label><input type="checkbox" ng-model="formData.chekboxes.value5" ng-true-value="'Parqueo'" ng-false-value="false">Parqueo</label>
-                          </div>
-                        </div>
-                        <div class="col-md-3">
-                          <div class="checkbox">
-                            <label><input type="checkbox" ng-model="formData.chekboxes.value6" ng-true-value="'Accesos'" ng-false-value="false">Accesos</label>
-                          </div>
-                          <div class="checkbox">
-                            <label><input type="checkbox" ng-model="formData.chekboxes.value7" ng-true-value="'Estudio'" ng-false-value="false">Estudio</label>
-                          </div>
-                          <div class="checkbox ">
-                            <label><input type="checkbox" ng-model="formData.chekboxes.value8" ng-true-value="'Calefaccion'" ng-false-value="false">Calefaccion</label>
-                          </div>
-                        </div>
-                        <div class="col-md-3">
-                          <div class="checkbox">
-                            <label><input type="checkbox" ng-model="formData.chekboxes.value9" ng-true-value="'Cisterna'" ng-false-value="false">Cisterna</label>
-                          </div>
-                          <div class="checkbox">
-                            <label><input type="checkbox" ng-model="formData.chekboxes.value10" ng-true-value="'Escuela'" ng-false-value="false">Escuela</label>
-                          </div>
-                          <div class="checkbox">
-                            <label><input type="checkbox" ng-model="formData.chekboxes.value11" ng-true-value="'Gymnacio'" ng-false-value="false">Gymnacio</label>
-                          </div>
+                          <input type="text" class="form-control" ng-model="formData.clavewords" placeholder="Separar las palabras clave con , ejem: Excelente casa, Casa de dos pisos, Casa en Fraccionamiento San Javier…">
                         </div>
                       </div>
                     </div>
-                    <button type="submit" class="btn btn-primary pull-right">Enviar</button>
                 </div>
-          </form>
+            </form>
           </div>
-          <div class="row">
-                      <p class="bg-primary">Agregar fotos</p>
-            <form role="form" name="upload" ng-submit='uploadFile()' >
+
+          <div class="row box-show" ng-show='formData.clavewords != ""'>
+              
                       <div class="form-group">
                           <div class="col-md-6">
                             <p class="text-center"><strong>Agregar imagenes de la casa</strong></p>
-                              <div style="border: 1px solid gray; height: 200px">
-                              
+                              <div style="border: 1px solid gray; height: 200px; overflow: auto;" id="homepicture">
+                                
+                                  
                               </div>
                               <br>
-                              <span class="button btn-file text-primary" ngf-select="submit('home')" ng-model="file" name="file" ngf-pattern="'image/*'"
-    ngf-accept="'image/*'" ngf-max-size="20MB" ngf-min-height="100" 
-    ngf-resize="{width: 100, height: 100}"><strong>Selecciona una imagen</strong></span>
+                              <span class="button btn-file text-primary pointer" ngf-select="submit('home','{{ formData.id_folder }}')" ng-model="file" name="file" ngf-pattern="'image/*'" ngf-accept="'image/*'" ngf-max-size="20MB" ngf-min-height="100" ngf-resize="{width: 100, height: 100}" ngf-multiple="multiple"><strong>Selecciona una imagen</strong></span>
                           </div>
                           <div class="col-md-6">
                                <p class="text-center"><strong>Agregar imagenes del vecindario</strong></p>
-                              <div style="border: 1px solid gray; height: 200px">
-                              
+                              <div style="border: 1px solid gray; height: 200px; overflow: auto;" id="hoodpicture">
+                                
+
                               </div>
                               <br>
-                              <span class="button btn-file text-primary" ngf-select="submit('hood')" ng-model="file" name="file" ngf-pattern="'image/*'"
-    ngf-accept="'image/*'" ngf-max-size="20MB" ngf-min-height="100" 
-    ngf-resize="{width: 100, height: 100}"><strong>Selecciona una imagen</strong></span>
-                        </div>
-                </div>  
-                <button type="submit" class="btn btn-primary pull-right" style="margin-top: 10px;" ng-click="submit()">Subir imagenes</button>
-            </form>
+                              <span class="button btn-file text-primary pointer" ngf-select="submit('hood','{{ formData.id_folder }}')" ng-model="file" name="file" ngf-pattern="'image/*'" ngf-accept="'image/*'" ngf-max-size="20MB" ngf-min-height="100" ngf-resize="{width: 100, height: 100}" ngf-multiple="multiple"><strong>Selecciona una imagen</strong></span>
+                          </div>
+                      </div>  
+          </div>
+          <div class="row box-show" ng-show='formData.mainHome != "" '>
+            <div class="col-md-6">
+              <label> Destacar</label>
+              <label class="radio-inline"><input type="radio" ng-model="formData.destacate" value='si' >Si</label>
+              <label class="radio-inline"><input type="radio" ng-model="formData.destacate" value='no' >No</label>
+            </div>
+            <button type="submit" class="btn btn-primary pull-right" ng-click="OnSendDataForm()">Enviar</button> 
+          </div>
+
         </div>
-        <div class="col-md-3">
+        <div class="col-md-2">
            
         </div>
     </div>

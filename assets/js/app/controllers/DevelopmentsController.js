@@ -68,7 +68,6 @@ app.controller("DevelopmentsController", ['$scope','blockUI', 'DevelopmentsDataS
             $("#developmentsModal").modal("hide");
             $scope.getDevelopments();
              blockUI.stop();
-            console.log(data);
             toastr.success(data.message);
             $scope.initDevelopments();
         }
